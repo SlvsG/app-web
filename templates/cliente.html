@@ -1,0 +1,87 @@
+{%extends "base.html" %}
+
+{% block content %}
+
+<div class="pt-24">
+      <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
+        
+        <div class="flex flex-col w-full p-2 justify-center items-start text-right md:text-left border">
+          <div class="border m-3 p-3 bg-red-100">
+             <h3 class="p-1"><b>Agregar Cliente:</b> </h3>
+             <form action="{% url 'crear_cliente' %}" method="post">
+                {% csrf_token %}
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                    </svg> 
+                <input class="p-1 border border-info" type="text" name="nombre" id="" placeholder="Nombre">
+                <input class="p-1 border border-info" type="text" name="tel" id="" placeholder="Teléfono">
+                <input class="p-1 border border-info" type="text" name="ine" id="" placeholder="ine">             
+                <button type="submit" class="bg-red-500 hover:bg-blue-700 text-black font-bold py-3 px-5 rounded">Agregar</button>
+                </button> 
+                
+          </div>
+        </form>
+             
+
+          <div class="p-2 w-full border flex mb-3">
+          <!-- forich -->
+            {% for c in clientes %}
+            
+                <div class="w-1/4 m-2 rounded overflow-hidden shadow-lg bg-red-100">            
+                   <div class="m-1 mb-0 float-center">
+                        <form class="m-1" action="{% url 'borrar_cliente' c.id %}" method="post">
+                            {% csrf_token %}
+                           
+                            <button type="submit">
+                                <svg fill="black" xmlns="http://www.w3.org/2000/svg" width="30" height="20" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm4.151 17.943l-4.143-4.102-4.117 4.159-1.833-1.833 4.104-4.157-4.162-4.119 1.833-1.833 4.155 4.102 4.106-4.16 1.849 1.849-4.1 4.141 4.157 4.104-1.849 1.849z"/></svg> 
+                            </button>
+                        </form>
+                        <form class="m-1" action="{% url 'actualizar_cliente' c.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">
+                                <svg fill="black" xmlns="http://www.w3.org/2000/svg" width="30" height="20" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-5 17l1.006-4.036 3.106 3.105-4.112.931zm5.16-1.879l-3.202-3.202 5.841-5.919 3.201 3.2-5.84 5.921z"/></svg>
+                            </button>       
+                                                
+                   </div>
+                    <div class="px-6 py-2">                                                                                   
+
+                        <div class="font-bold text-xl mb-2">   
+                            <b>Nombre:</b>                         
+                            <input class="bg-red-200" type="text" name="nombre" id="" placeholder="Nombre" value="{{ c.nombre }}">
+                        </div>
+                        <p class="text-gray-700 text-base">
+                            <b>Teléfono:</b>                            
+                            <input class="bg-red-200 m-2" type="text" name="tel" id="" placeholder="Teléfono" value="{{c.telefono}}">
+                        </p>
+                        <p>
+                            <b>INE:</b>                             
+                            <input class="bg-red-200" type="text" name="ine" id="" placeholder="INE" value="{{c.INE}}">
+                        </p>
+
+                                         
+                    </div>   
+                    </form>                         
+                </div>    
+                
+            {% endfor %}            
+          <!-- @endforeach -->
+          </div>    
+          <button class="mx-auto lg:mx-0 hover:underline bg-red text-gray-1000 font-bold rounded-full my-8 py-5 px-5 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-30 duration-300 ease-in-out">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="black" class="bi bi-people" viewBox="0 0 16 16">
+            <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+            </svg>
+            <b>
+              Clientes Frecuentes
+              
+            </b>
+          </button>            
+        </div>    
+    </div>
+</div>
+
+
+
+{% endblock %}

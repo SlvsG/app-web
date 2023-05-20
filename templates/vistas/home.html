@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<style>
+  .centrado {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px; /* Altura del contenedor */
+  }
+
+.centrado img {
+    max-width: 100%; /* Establece el ancho máximo de la imagen al 100% del contenedor */
+    max-height: 100%; /* Establece la altura máxima de la imagen al 100% del contenedor */
+    height: auto; /* Permite que la imagen se ajuste proporcionalmente al cambiar el ancho */
+    width: auto; /* Permite que la imagen se ajuste proporcionalmente al cambiar la altura */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+    }
+</style>
+
+<main class="row">
+  <!-- Inicio -->
+ <section id="inicio">
+    <div class="contenedor-img centrado">
+     <img src="https://cdn-icons-png.flaticon.com/512/3749/3749917.png">
+    </div>
+     <div class="contenido">
+         <div class="info">
+             <h3>Biblioteca Tarimitas</h3>
+             <br>
+           
+             <br><br>
+ 
+         </div>
+     </div>
+ </section>
+  <tbody>
+</div>
+</main>
+
+{% endblock %}
